@@ -11,7 +11,7 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Patient Management
                     </Typography>
-                    <Button color="inherit" component={Link} href="/">Add Patient</Button>
+                    <Button color="inherit" component={Link} href="/add-patient">Add Patient</Button>
                     <Button color="inherit" component={Link} href="/update-patient-details">Update Patient Details</Button>
                     <Button color="inherit" component={Link} href="/search">Search Patient</Button>
                 </Toolbar>

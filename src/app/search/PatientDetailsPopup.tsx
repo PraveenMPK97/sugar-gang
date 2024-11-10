@@ -19,7 +19,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
-import { Patient } from './SearchPatientPage';
+import { Patient } from './page';
 
 
 export interface PatientDetail {
