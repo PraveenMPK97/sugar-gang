@@ -26,7 +26,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 SET 
                     consultant = ${consultant}, 
                     diagnosis = ${diagnosis}, 
-                    comorbidities = ${comorbidities}, 
+                    comorbidities = ${comorbidities} 
+                    
+                WHERE 
+                    patient_id = ${patientId}
+            `;
+
+            const patientDetailsResult = await sql`
+                UPDATE patient_details
+                SET 
                     grbs = ${grbs}, 
                     grbs_datetime = ${grbsDatetime}, 
                     investigation = ${investigation}, 
@@ -34,6 +42,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 WHERE 
                     patient_id = ${patientId}
             `;
+            console.log("patient details result",patientDetailsResult);
+            
             if (result.rowCount === 0) {
                 return res.status(404).json({ error: 'Patient not found' });
             }

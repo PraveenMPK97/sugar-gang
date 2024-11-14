@@ -10,7 +10,7 @@ const AddPatient: React.FC = () => {
   const handleAddPatient = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/addPatient', {
+      const response = await axios.post('api/addPatient', {
         patientName,
         patientRoomNo,
       });

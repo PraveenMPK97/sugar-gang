@@ -41,7 +41,7 @@ const SearchPatients: React.FC = () => {
 
     const handleSearch = async () => {
         try {
-            const response = await fetch(`/api/searchPatients?searchTerm=${encodeURIComponent(searchTerm)}`);
+            const response = await fetch(`api/searchPatients?searchTerm=${encodeURIComponent(searchTerm)}`);
             const data: Patient[] = await response.json();
             setPatients(data);
             setError('');

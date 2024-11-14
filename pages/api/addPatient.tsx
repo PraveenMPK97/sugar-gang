@@ -21,6 +21,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         VALUES (${patientName}, ${patientRoomNo})
         RETURNING *
       `;
+      console.log("add Result",result);
+
+      const patientDetailsResult = await sql`
+      INSERT INTO patient_details (patient_id)
+      VALUES (${result.rows[0].patient_id})
+      RETURNING *
+    `;
+    const patientRemarksResult= await sql`
+    INSERT INTO patient_remarks (patient_id)
+    VALUES (${result.rows[0].patient_id})
+    RETURNING *
+  `;
 
       return res.status(200).json({
         message: 'Patient added successfully!',

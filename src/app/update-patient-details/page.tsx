@@ -30,16 +30,16 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 
 interface Patient {
-    patientId: string;
-    patientName: string;
-    patientRoomNo: string;
+    patient_id: string;
+    patient_name: string;
+    patient_room_no: string;
     consultant?: string;
     diagnosis?: string;
     comorbidities?: string;
     grbs?: number;
-    grbsDatetime?: string;
+    grbs_datetime?: string;
     investigation?: string;
-    investigationDatetime?: string;
+    investigation_datetime?: string;
 }
 
 const UpdatePatientDetails: React.FC = () => {
@@ -60,7 +60,9 @@ const UpdatePatientDetails: React.FC = () => {
 
     useEffect(() => {
         axios.get<Patient[]>('/api/getUpdatePatientDetails') // Updated endpoint to fetch all patients
-            .then(response => setPatients(response.data))
+            .then(response => {
+                console.log('response',response.data)
+                setPatients(response.data)})
             .catch(error => {
                 console.error("Error fetching patients:", error);
             });
@@ -105,14 +107,14 @@ const UpdatePatientDetails: React.FC = () => {
     };
 
     const openEditDialog = (patient: Patient) => {
-        setSelectedPatientId(patient.patientId);
+        setSelectedPatientId(patient.patient_id);
         setConsultant(patient.consultant || '');
         setDiagnosis(patient.diagnosis || '');
         setComorbidities(patient.comorbidities || '');
         setGrbs(patient.grbs || '');
-        setGrbsDatetime(dayjs(patient.grbsDatetime).format("YYYY-MM-DDTHH:mm"));
+        setGrbsDatetime(dayjs(patient.grbs_datetime).format("YYYY-MM-DDTHH:mm"));
         setInvestigation(patient.investigation || '');
-        setInvestigationDatetime(dayjs(patient.investigationDatetime).format("YYYY-MM-DDTHH:mm"));
+        setInvestigationDatetime(dayjs(patient.investigation_datetime).format("YYYY-MM-DDTHH:mm"));
         setCustomInvestigation(''); // Reset custom investigation
         setOpenDialog(true);
     };
@@ -140,9 +142,9 @@ const UpdatePatientDetails: React.FC = () => {
                     </TableHead>
                     <TableBody>
                         {patients.map((patient) => (
-                            <TableRow key={patient.patientId}>
-                                <TableCell>{patient.patientName}</TableCell>
-                                <TableCell>{patient.patientRoomNo}</TableCell>
+                            <TableRow key={patient.patient_id}>
+                                <TableCell>{patient.patient_name}</TableCell>
+                                <TableCell>{patient.patient_room_no}</TableCell>
                                 <TableCell>{patient.consultant}</TableCell>
                                 <TableCell>{patient.diagnosis}</TableCell>
                                 <TableCell>
@@ -180,8 +182,8 @@ const UpdatePatientDetails: React.FC = () => {
                             disabled
                         >
                             {patients.map((patient) => (
-                                <MenuItem key={patient.patientId} value={patient.patientId}>
-                                    {patient.patientName} - {patient.patientRoomNo}
+                                <MenuItem key={patient.patient_id} value={patient.patient_id}>
+                                    {patient.patient_name} - {patient.patient_room_no}
                                 </MenuItem>
                             ))}
                         </Select>
