@@ -4,35 +4,25 @@ import { sql } from '@vercel/postgres';
 interface RequestBody {
   patientName: string;
   patientRoomNo: string;
+  age:number
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    const { patientName, patientRoomNo }: RequestBody = req.body;
+    const { patientName, patientRoomNo,age }: RequestBody = req.body;
 
-    if (!patientName || !patientRoomNo) {
-      return res.status(400).json({ error: 'Patient name and room number are required' });
+    if (!patientName || !patientRoomNo || !age) {
+      return res.status(400).json({ error: 'Patient name,age and room number are required' });
     }
 
     try {
       // Insert new patient data into the patients table
       const result = await sql`
-        INSERT INTO patients (patient_name, patient_room_no)
-        VALUES (${patientName}, ${patientRoomNo})
+        INSERT INTO patients (patient_name, patient_room_no, age)
+        VALUES (${patientName}, ${patientRoomNo},${age})
         RETURNING *
       `;
       console.log("add Result",result);
-
-      const patientDetailsResult = await sql`
-      INSERT INTO patient_details (patient_id)
-      VALUES (${result.rows[0].patient_id})
-      RETURNING *
-    `;
-    const patientRemarksResult= await sql`
-    INSERT INTO patient_remarks (patient_id)
-    VALUES (${result.rows[0].patient_id})
-    RETURNING *
-  `;
 
       return res.status(200).json({
         message: 'Patient added successfully!',

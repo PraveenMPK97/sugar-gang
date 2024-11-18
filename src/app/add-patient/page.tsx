@@ -6,6 +6,7 @@ import { TextField, Button, Container, Typography } from '@mui/material';
 const AddPatient: React.FC = () => {
   const [patientName, setPatientName] = useState<string>('');
   const [patientRoomNo, setPatientRoomNo] = useState<string>('');
+  const [age, setAge] = useState<number>();
 
   const handleAddPatient = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -13,10 +14,12 @@ const AddPatient: React.FC = () => {
       const response = await axios.post('api/addPatient', {
         patientName,
         patientRoomNo,
+        age,
       });
       alert(response.data.message);
       setPatientName('');
       setPatientRoomNo('');
+      setAge(0);
     } catch (error) {
       console.error('Error adding patient:', error);
       alert('Failed to add patient');
@@ -43,6 +46,16 @@ const AddPatient: React.FC = () => {
           value={patientRoomNo}
           onChange={(e) => setPatientRoomNo(e.target.value)}
           margin="normal"
+          required
+        />
+        <TextField
+          fullWidth
+          label="Age"
+          type="number"
+          value={age}
+          onChange={(e) => setAge(Number(e.target.value))}
+          margin="normal"
+          inputProps={{ min: 0 }}
           required
         />
         <Button type="submit" variant="contained" color="primary">

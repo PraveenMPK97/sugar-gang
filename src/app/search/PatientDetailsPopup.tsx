@@ -27,6 +27,7 @@ export interface PatientDetail {
     grbs: string;
     grbsDatetime: string;
     investigation: string;
+    investigationValue: number;
     investigationDatetime: string;
 }
 
@@ -79,6 +80,7 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
 
     const handleSavePatientDetails = () => {
         setLoading(true);
+        console.log("patient details",patientDetails);
         fetch('/api/savePatientDetails', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -93,7 +95,7 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
             .finally(() => setLoading(false));
     };
 
-    const handleDetailChange = (index: number, field: keyof PatientDetail, value: string) => {
+    const handleDetailChange = (index: number, field: keyof PatientDetail, value: any) => {
         const updatedDetails = [...patientDetails];
         updatedDetails[index] = { ...updatedDetails[index], [field]: value };
         setPatientDetails(updatedDetails);
@@ -192,6 +194,18 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
                                         />
                                     ) : (
                                         detail.investigation
+                                    )}
+                                </TableCell>
+                                <TableCell>
+                                    {isEditing ? (
+                                        <TextField
+                                            variant="outlined"
+                                            type="number"
+                                            value={detail.investigationValue}
+                                            onChange={(e) => handleDetailChange(index, 'investigationValue', Number(e.target.value))}
+                                        />
+                                    ) : (
+                                        detail.investigationValue
                                     )}
                                 </TableCell>
                                 <TableCell>

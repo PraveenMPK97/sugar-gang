@@ -51,6 +51,7 @@ const UpdatePatientDetails: React.FC = () => {
     const [grbs, setGrbs] = useState<number | string>(''); // Allowing string to handle empty input
     const [grbsDatetime, setGrbsDatetime] = useState<string>('');
     const [investigation, setInvestigation] = useState<string>('');
+    const [investigationValue, setInvestigationValue] = useState<number>(0);
     const [investigationDatetime, setInvestigationDatetime] = useState<string>('');
     const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
     const [snackbarMessage, setSnackbarMessage] = useState<string>('');
@@ -80,6 +81,7 @@ const UpdatePatientDetails: React.FC = () => {
             grbs: typeof grbs === 'number' ? grbs : parseFloat(grbs), // Ensure grbs is a number
             grbsDatetime: formattedGrbsDatetime,
             investigation: investigation === 'OTHERS' ? customInvestigation : investigation, // Use custom investigation if selected
+            investigationValue: investigationValue,
             investigationDatetime: formattedInvestigationDatetime
         };
 
@@ -116,6 +118,7 @@ const UpdatePatientDetails: React.FC = () => {
         setInvestigation(patient.investigation || '');
         setInvestigationDatetime(dayjs(patient.investigation_datetime).format("YYYY-MM-DDTHH:mm"));
         setCustomInvestigation(''); // Reset custom investigation
+        setInvestigationValue(0);
         setOpenDialog(true);
     };
 
@@ -275,7 +278,14 @@ const UpdatePatientDetails: React.FC = () => {
                             style={{ marginBottom: '20px' }}
                         />
                     )}
-
+                    <TextField
+                        fullWidth
+                        label="Investigated value"
+                        type="number"
+                        value={investigationValue}
+                        onChange={(e) => setInvestigationValue(Number(e.target.value))}
+                        margin="normal"
+                    />
                     <TextField
                         label="Investigation Date & Time"
                         variant="outlined"

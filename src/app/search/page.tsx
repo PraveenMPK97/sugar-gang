@@ -150,6 +150,7 @@ const SearchPatients: React.FC = () => {
                                                             <TableCell>GRBS</TableCell>
                                                             <TableCell>GRBS Date & Time</TableCell>
                                                             <TableCell>Investigation</TableCell>
+                                                            <TableCell>Investigated value</TableCell>
                                                             <TableCell>Investigation Date & Time</TableCell>
                                                         </TableRow>
                                                     </TableHead>
@@ -161,6 +162,7 @@ const SearchPatients: React.FC = () => {
                                                                     {new Date(detail.grbsDatetime).toLocaleString()}
                                                                 </TableCell>
                                                                 <TableCell>{detail.investigation}</TableCell>
+                                                                <TableCell>{detail.investigationValue}</TableCell>
                                                                 <TableCell>
                                                                     {new Date(detail.investigationDatetime).toLocaleString()}
                                                                 </TableCell>

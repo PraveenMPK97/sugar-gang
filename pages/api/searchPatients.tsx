@@ -20,9 +20,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     patients.consultant AS "consultant",
                     patients.diagnosis AS "diagnosis",
                     patients.comorbidities AS "comorbidities",
+                    patient_details.detail_id AS "detailId",
                     patient_details.grbs AS "grbs",
                     patient_details.grbs_datetime AS "grbsDatetime",
                     patient_details.investigation AS "investigation",
+                    patient_details.investigation_value AS "investigationValue",
                     patient_details.investigation_datetime AS "investigationDatetime"
                 FROM 
                     patients
@@ -45,9 +47,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 diagnosis: string;
                 comorbidities: string;
                 patientDetails: {
+                    detailId: number | null;
                     grbs: number | null;
                     grbsDatetime: string | null;
                     investigation: string | null;
+                    investigationValue: number | null;
                     investigationDatetime: string | null;
                 }[];
             }>();
@@ -60,9 +64,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     consultant,
                     diagnosis,
                     comorbidities,
+                    detailId,
                     grbs,
                     grbsDatetime,
                     investigation,
+                    investigationValue,
                     investigationDatetime
                 } = row;
 
@@ -81,9 +87,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 // Add patient detail if it exists
                 if (grbs || grbsDatetime || investigation || investigationDatetime) {
                     patientsMap.get(patientId)?.patientDetails.push({
+                        detailId,
                         grbs,
                         grbsDatetime,
                         investigation,
+                        investigationValue,
                         investigationDatetime
                     });
                 }

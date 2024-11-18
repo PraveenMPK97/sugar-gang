@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(500).json({ error: 'Error fetching patients' });
         }
     } else if (req.method === 'POST') {
-        const { patientId, consultant, diagnosis, comorbidities, grbs, grbsDatetime, investigation, investigationDatetime } = req.body;
+        const { patientId, consultant, diagnosis, comorbidities, grbs, grbsDatetime, investigation,investigationValue,investigationDatetime } = req.body;
 
         // Validate required fields
         if (!patientId || !consultant || !diagnosis || !grbs) {
@@ -33,14 +33,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             `;
 
             const patientDetailsResult = await sql`
-                UPDATE patient_details
-                SET 
-                    grbs = ${grbs}, 
-                    grbs_datetime = ${grbsDatetime}, 
-                    investigation = ${investigation}, 
-                    investigation_datetime = ${investigationDatetime}
-                WHERE 
-                    patient_id = ${patientId}
+            INSERT INTO patient_details (
+                patient_id, 
+                grbs, 
+                grbs_datetime, 
+                investigation,
+                investigation_value, 
+                investigation_datetime
+            ) VALUES (
+                ${patientId}, 
+                ${grbs}, 
+                ${grbsDatetime}, 
+                ${investigation},
+                ${investigationValue},
+                ${investigationDatetime}
+            )
             `;
             console.log("patient details result",patientDetailsResult);
             
