@@ -25,6 +25,7 @@ export interface Patient {
     patientId: number;
     patientName: string;
     patientRoomNo: string;
+    age:number;
     consultant: string;
     diagnosis: string;
     comorbidities: string;
@@ -110,6 +111,7 @@ const SearchPatients: React.FC = () => {
                                 <TableCell>Patient ID</TableCell>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Room Number</TableCell>
+                                <TableCell>Age</TableCell>
                                 <TableCell>Consultant</TableCell>
                                 <TableCell>Diagnosis</TableCell>
                                 <TableCell>Comorbidities</TableCell>
@@ -128,6 +130,7 @@ const SearchPatients: React.FC = () => {
                                         <TableCell>{patient.patientId}</TableCell>
                                         <TableCell>{patient.patientName}</TableCell>
                                         <TableCell>{patient.patientRoomNo}</TableCell>
+                                        <TableCell>{patient.age}</TableCell>
                                         <TableCell>{patient.consultant}</TableCell>
                                         <TableCell>{patient.diagnosis}</TableCell>
                                         <TableCell>{patient.comorbidities}</TableCell>

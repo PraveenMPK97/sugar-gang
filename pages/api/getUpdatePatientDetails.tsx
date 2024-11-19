@@ -13,10 +13,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(500).json({ error: 'Error fetching patients' });
         }
     } else if (req.method === 'POST') {
-        const { patientId, consultant, diagnosis, comorbidities, grbs, grbsDatetime, investigation,investigationValue,investigationDatetime } = req.body;
+        const { patientId,age , consultant, diagnosis, comorbidities, grbs, grbsDatetime, investigation,investigationValue,investigationDatetime } = req.body;
 
         // Validate required fields
-        if (!patientId || !consultant || !diagnosis || !grbs) {
+        if (!patientId || !consultant || !diagnosis) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
@@ -24,6 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const result = await sql`
                 UPDATE patients
                 SET 
+                    age =${age},
                     consultant = ${consultant}, 
                     diagnosis = ${diagnosis}, 
                     comorbidities = ${comorbidities} 

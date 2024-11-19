@@ -155,6 +155,7 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
                             <TableCell>GRBS</TableCell>
                             <TableCell>GRBS Date & Time</TableCell>
                             <TableCell>Investigation</TableCell>
+                            <TableCell>Investigation Value</TableCell>
                             <TableCell>Investigation Date & Time</TableCell>
                             <TableCell>Actions</TableCell>
                         </TableRow>

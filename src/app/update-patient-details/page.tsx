@@ -33,6 +33,7 @@ interface Patient {
     patient_id: string;
     patient_name: string;
     patient_room_no: string;
+    age:number;
     consultant?: string;
     diagnosis?: string;
     comorbidities?: string;
@@ -45,6 +46,7 @@ interface Patient {
 const UpdatePatientDetails: React.FC = () => {
     const [patients, setPatients] = useState<Patient[]>([]);
     const [selectedPatientId, setSelectedPatientId] = useState<string>('');
+    const [age,setAge] =useState<number>();
     const [consultant, setConsultant] = useState<string>('');
     const [diagnosis, setDiagnosis] = useState<string>('');
     const [comorbidities, setComorbidities] = useState<string>('');
@@ -75,6 +77,7 @@ const UpdatePatientDetails: React.FC = () => {
 
         const data = {
             patientId: selectedPatientId,
+            age,
             consultant,
             diagnosis,
             comorbidities,
@@ -110,6 +113,7 @@ const UpdatePatientDetails: React.FC = () => {
 
     const openEditDialog = (patient: Patient) => {
         setSelectedPatientId(patient.patient_id);
+        setAge(patient.age);
         setConsultant(patient.consultant || '');
         setDiagnosis(patient.diagnosis || '');
         setComorbidities(patient.comorbidities || '');
@@ -138,6 +142,7 @@ const UpdatePatientDetails: React.FC = () => {
                         <TableRow>
                             <TableCell>Patient Name</TableCell>
                             <TableCell>Room Number</TableCell>
+                            <TableCell>Age</TableCell>
                             <TableCell>Consultant</TableCell>
                             <TableCell>Diagnosis</TableCell>
                             <TableCell>Actions</TableCell>
@@ -148,6 +153,7 @@ const UpdatePatientDetails: React.FC = () => {
                             <TableRow key={patient.patient_id}>
                                 <TableCell>{patient.patient_name}</TableCell>
                                 <TableCell>{patient.patient_room_no}</TableCell>
+                                <TableCell>{patient.age}</TableCell>
                                 <TableCell>{patient.consultant}</TableCell>
                                 <TableCell>{patient.diagnosis}</TableCell>
                                 <TableCell>
@@ -191,6 +197,16 @@ const UpdatePatientDetails: React.FC = () => {
                             ))}
                         </Select>
                     </FormControl>
+
+                    <TextField
+                        label="Age"
+                        variant="outlined"
+                        type="number"
+                        fullWidth
+                        value={age}
+                        onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setAge(Number(e.target.value))}
+                        style={{ marginBottom: '20px' }}
+                    />
 
                     <TextField
                         label="Consultant"

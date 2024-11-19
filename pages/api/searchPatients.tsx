@@ -17,6 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     patients.patient_id AS "patientId",
                     patients.patient_name AS "patientName",
                     patients.patient_room_no AS "patientRoomNo",
+                    patients.age AS "age",
                     patients.consultant AS "consultant",
                     patients.diagnosis AS "diagnosis",
                     patients.comorbidities AS "comorbidities",
@@ -43,6 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 patientId: number;
                 patientName: string;
                 patientRoomNo: string;
+                age:number;
                 consultant: string;
                 diagnosis: string;
                 comorbidities: string;
@@ -61,6 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     patientId,
                     patientName,
                     patientRoomNo,
+                    age,
                     consultant,
                     diagnosis,
                     comorbidities,
@@ -77,6 +80,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         patientId,
                         patientName,
                         patientRoomNo,
+                        age,
                         consultant,
                         diagnosis,
                         comorbidities,
