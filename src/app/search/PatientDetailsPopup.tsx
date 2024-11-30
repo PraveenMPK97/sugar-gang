@@ -183,6 +183,7 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
                                             onChange={(e) => handleDetailChange(index, 'grbsDatetime', e.target.value)}
                                         />
                                     ) : (
+                                        detail.grbsDatetime?
                                         new Date(detail.grbsDatetime).toLocaleString(
                                             "en-US",
                                             {
@@ -195,7 +196,7 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
                                               day: "numeric",
                                               year: "numeric",
                                             }
-                                          )
+                                          ):""
                                     )}
                                 </TableCell>
                                 <TableCell>
@@ -230,6 +231,7 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
                                             onChange={(e) => handleDetailChange(index, 'investigationDatetime', e.target.value)}
                                         />
                                     ) : (
+                                        detail.investigationDatetime?
                                         new Date(detail.investigationDatetime).toLocaleString(
                                             "en-US",
                                             {
@@ -242,7 +244,7 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
                                               day: "numeric",
                                               year: "numeric",
                                             }
-                                          )
+                                          ): ""
                                     )}
                                 </TableCell>
                                 <TableCell>
