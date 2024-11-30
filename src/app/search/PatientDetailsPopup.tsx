@@ -183,7 +183,18 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
                                             onChange={(e) => handleDetailChange(index, 'grbsDatetime', e.target.value)}
                                         />
                                     ) : (
-                                        new Date(detail.grbsDatetime).toLocaleString()
+                                        new Date(detail.grbsDatetime).toLocaleString(
+                                            "en-US",
+                                            {
+                                              hour: "2-digit",
+                                              minute: "2-digit",
+                                              second: "2-digit",
+                                              hour12: true, // Ensures 12-hour format with AM/PM
+                                              month: "short",
+                                              day: "numeric",
+                                              year: "numeric",
+                                            }
+                                          )
                                     )}
                                 </TableCell>
                                 <TableCell>
@@ -218,7 +229,18 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
                                             onChange={(e) => handleDetailChange(index, 'investigationDatetime', e.target.value)}
                                         />
                                     ) : (
-                                        new Date(detail.investigationDatetime).toLocaleString()
+                                        new Date(detail.investigationDatetime).toLocaleString(
+                                            "en-US",
+                                            {
+                                              hour: "2-digit",
+                                              minute: "2-digit",
+                                              second: "2-digit",
+                                              hour12: true, // Ensures 12-hour format with AM/PM
+                                              month: "short",
+                                              day: "numeric",
+                                              year: "numeric",
+                                            }
+                                          )
                                     )}
                                 </TableCell>
                                 <TableCell>
