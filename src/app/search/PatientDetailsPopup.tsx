@@ -186,6 +186,7 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
                                         new Date(detail.grbsDatetime).toLocaleString(
                                             "en-US",
                                             {
+                                              timeZone: "UTC",
                                               hour: "2-digit",
                                               minute: "2-digit",
                                               second: "2-digit",
@@ -232,6 +233,7 @@ const PatientDetailsPopup: React.FC<PatientDetailsPopupProps> = ({ open, handleC
                                         new Date(detail.investigationDatetime).toLocaleString(
                                             "en-US",
                                             {
+                                              timeZone: "UTC",
                                               hour: "2-digit",
                                               minute: "2-digit",
                                               second: "2-digit",

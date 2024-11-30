@@ -190,6 +190,7 @@ const SearchPatients: React.FC = () => {
                                   {new Date(detail.grbsDatetime).toLocaleString(
                                     "en-US",
                                     {
+                                      timeZone: "UTC",
                                       hour: "2-digit",
                                       minute: "2-digit",
                                       second: "2-digit",
@@ -209,6 +210,7 @@ const SearchPatients: React.FC = () => {
                                   {new Date(
                                     detail.investigationDatetime
                                   ).toLocaleString("en-US", {
+                                    timeZone: "UTC",
                                     hour: "2-digit",
                                     minute: "2-digit",
                                     second: "2-digit",
