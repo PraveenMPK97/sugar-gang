@@ -186,39 +186,42 @@ const SearchPatients: React.FC = () => {
                               <TableRow key={detail.detailId}>
                                 <TableCell>{detail.grbs}</TableCell>
                                 <TableCell>
-                                  {/* Convert to 12-hour format with AM/PM */}
-                                  {new Date(detail.grbsDatetime).toLocaleString(
-                                    "en-US",
-                                    {
-                                      timeZone: "UTC",
-                                      hour: "2-digit",
-                                      minute: "2-digit",
-                                      second: "2-digit",
-                                      hour12: true, // Ensures 12-hour format with AM/PM
-                                      month: "short",
-                                      day: "numeric",
-                                      year: "numeric",
-                                    }
-                                  )}
+                                  {/* Check if datetime exists before formatting */}
+                                  {detail.grbsDatetime
+                                    ? new Date(
+                                        detail.grbsDatetime
+                                      ).toLocaleString("en-US", {
+                                        timeZone: "UTC",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        second: "2-digit",
+                                        hour12: true, // Ensures 12-hour format with AM/PM
+                                        month: "short",
+                                        day: "numeric",
+                                        year: "numeric",
+                                      })
+                                    : ""}
                                 </TableCell>
                                 <TableCell>{detail.investigation}</TableCell>
                                 <TableCell>
                                   {detail.investigationValue}
                                 </TableCell>
                                 <TableCell>
-                                  {/* Convert to 12-hour format with AM/PM */}
-                                  {new Date(
-                                    detail.investigationDatetime
-                                  ).toLocaleString("en-US", {
-                                    timeZone: "UTC",
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                    second: "2-digit",
-                                    hour12: true, // Ensures 12-hour format with AM/PM
-                                    month: "short",
-                                    day: "numeric",
-                                    year: "numeric",
-                                  })}
+                                  {/* Check if datetime exists before formatting */}
+                                  {detail.investigationDatetime
+                                    ? new Date(
+                                        detail.investigationDatetime
+                                      ).toLocaleString("en-US", {
+                                        timeZone: "UTC",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        second: "2-digit",
+                                        hour12: true, // Ensures 12-hour format with AM/PM
+                                        month: "short",
+                                        day: "numeric",
+                                        year: "numeric",
+                                      })
+                                    : ""}
                                 </TableCell>
                               </TableRow>
                             ))}
